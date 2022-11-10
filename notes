@@ -1,0 +1,3 @@
+command to install layouts:
+step 1: npm install express-ejs-layouts
+step 2: create layout file in views folder
