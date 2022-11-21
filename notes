@@ -1,3 +1,19 @@
 command to install layouts:
 step 1: npm install express-ejs-layouts
 step 2: create layout file in views folder
+
+
+command for installing mongoose:
+step 1: npm install mongoose
+step 2: create moongoose.js folder inside config
+step 3: go with the command mentioned in the mongoose folder
+
+command for installing cookies:
+step-1:npm install cookie-parser
+step-2: 
+
+Authentication steps:
+step-1:Create user(Sign-up)
+step-2:Create session(Sign-In)
+step-3:show detail of signed in user on profile page
+step-4:sign-out
