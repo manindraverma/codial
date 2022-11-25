@@ -11,12 +11,18 @@ module.exports.about=function(request,respond){
 }
 //render the signUp page
 module.exports.SignIn=function(request,respond){
+    if(request.isAuthenticated()){
+        return respond.redirect('/users/profile')
+    }
     return respond.render('user_sign_in',{
         title: "coedial | SignIn"
     })
 }
 //render the signup page
 module.exports.SignUp=function(request,respond){
+    if(request.isAuthenticated()){
+         return respond.redirect('/users/profile')
+    }
     return respond.render('user_sign_up',{
         title: "coedial | SignUp"
     })
@@ -47,5 +53,21 @@ module.exports.create=function(req,res){
 
 //sign IN  and create a session for the user
 module.exports.createSession=function(req,res){
-    //todo later
+    //this redirect to homepage
+    //session will be created inside passport.js itself
+    return res.redirect('/');
+}
+
+//
+module.exports.destroySession=function(req,res,next){
+
+    //before redirecting to homepage we need to logout from the session
+    //logout function is given by passport.js to request
+    req.logout(function(err){
+        if(err){
+            return next(err);
+        }
+        res.redirect('/');
+    }); 
+  //  return res.redirect('/');
 }
