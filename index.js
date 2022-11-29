@@ -10,10 +10,28 @@ const passportLocal=require('./config/passport-local-strategy');
 //below library is used to store the session cookie in db  so that even after the server restart ,session do not get deleted
 //unlike other library this library require argument which is going to stored
 const MongoStore=require('connect-mongo')(session);
+//below middlware package/library is to just convert sass-css code into css format before sending it to the browser
+const sassMiddleware=require('node-sass-middleware');
 
 //when we use layouts library
 const expressLayouts= require('express-ejs-layouts')
 
+
+//we need to put the below middleware just before the server starts bcoz we need sass files to pre compiled before server starts so whenever our template/browser ask for it these precompiled files are given back
+app.use(sassMiddleware({
+//below  is path from where we pick up the scss files to convert it into css
+src:'./assets/scss',
+//below is the path where do i need to place the converted css files
+dest:'./assets/css',
+//below property is to see the error which might occur while compiling the scss file into css in the terminal note:put below option false if running in the production mode
+debug:true,
+//below property helps to identify whether we want output to be in a single line or in multiple line so now we want it in expanded mode
+outputStyle:'expanded',
+//below property helps server  to look out for css file
+prefix:'/css'
+
+
+}));
 
 
 //reading through the post request
