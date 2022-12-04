@@ -1,4 +1,5 @@
 //to establish relationship in database of 1 is too many type like this where one user can post many post 
+const User=require('../models/user');
 const mongoose=require('mongoose');
 //creating a schema to build a collection that goes into database
 const postSchema= new mongoose.Schema({

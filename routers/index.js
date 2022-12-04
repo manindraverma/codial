@@ -8,7 +8,8 @@ router.get('/',homeController.home);
 
 router.get('/profile',homeController.profile)
 
-router.use('/users',require('./users'))
+router.use('/users',require('./users'));
+router.use('/posts',require("./post"));
 
 console.log('router loaded successfully');
 
