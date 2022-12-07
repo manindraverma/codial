@@ -15,7 +15,15 @@ const postSchema= new mongoose.Schema({
            type:mongoose.Schema.Types.ObjectId,
            //ref: this shows we refer to which schema here we refer to user schema
            ref:'User'
+    },
+    //includes the array of ids of all comments in this post Schema itself
+    comments:[{
+        type:mongoose.Schema.Types.ObjectId,
+        //ref: this shows we refer to which schema here we refer to user schema
+        ref:'comment'
     }
+]
+
  
     
 
