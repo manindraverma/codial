@@ -2,9 +2,26 @@ const User=require('../models/user');
 module.exports.home=function(request,respond){
     // return respond.end('<h1>Express is up for codial!</h1>')
 
-    return respond.render('user_profile',{
-        title: 'User Profile'
+    User.findById(request.params.id,function(err,user){
+        return respond.render('user_profile',{
+            title: 'User Profile',
+            profile_user: user
     });
+ });
+}
+
+//update function
+module.exports.update=function(request,respond){
+//to check whether the logged  in user is updating only his/her own profile
+if(request.user.id==request.params.id){
+    User.findByIdAndUpdate(request.params.id,request.body,function(err,user){
+        return respond.redirect('back');
+    });
+}
+else{
+    return respond.status(401).send('unauthorized');
+}
+
 }
 module.exports.about=function(request,respond){
     return respond.end('<h1>User details are available here!</h1>');

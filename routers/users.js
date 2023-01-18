@@ -8,7 +8,9 @@ const userController=require('../controllers/user_controller')
 router.get('/about',userController.about);
 
 //we want to make the profile page only accessible when the user is signed in so we will add passport.setAuthentication middleware once  if authentication is checked than only profile page is visible
-router.get('/profile',passport.checkAuthentication,userController.home);
+router.get('/profile/:id',passport.checkAuthentication,userController.home);
+router.post('/update/:id',passport.checkAuthentication,userController.update);
+
 
 
 

@@ -3,12 +3,11 @@ const router=express.Router();
 const passport=require('passport');
 
 //need to import the controller to get the action 
-const postController=require("../controllers/posts_controller");
+const commentsController=require("../controllers/comments_controller");
 //now we can access all the action exported in the post controller
 //so to access we use below lines
-router.post('/create',passport.checkAuthentication, postController.create);
-//deleting a post
-router.get('/destroy/:id',passport.checkAuthentication,postController.destroy);
+router.post('/create',passport.checkAuthentication, commentsController.create);
+router.get('/destroy/:id',passport.checkAuthentication,commentsController.destroy);
 
 module.exports=router;
 

@@ -1,8 +1,18 @@
 const Post=require('../models/post');
-module.exports.home=function(request,respond){
+const Comment=require('../models/comment');
+//need to import user inorder to use it
+const User=require('../models/user');
+
+//inorder to make the below codes much clear we asyn await method- for this we need to declare the function with async keyword as below bcos async keyword declare that this statement contain some async statement
+//note without async also this function will work just to make the code clear we async await method
+module.exports.home=  function(request,respond){
     // return respond.end('<h1>Express is up for codial!</h1>')
 //     console.log(request.Cookies);
 //    respond.cookie('user_id',25);
+// return respond.render('home',{
+//             title: 'Home',
+           
+//         });
 // Post.find({},function(err,posts){
 //     return respond.render('home',{
 //         title: 'Home',
@@ -11,10 +21,21 @@ module.exports.home=function(request,respond){
 // }
 // )
 //here we are finding the post and than populating each user of the post and after this calling the call back function
-    Post.find({}).populate('user').exec(function(err,posts){
-        return respond.render('home',{
-            title: 'Home',
-            posts:posts
+    Post.find({}).populate('user')
+    //below we are population comment and also the user of that comment
+    .populate({path:'comments',populate:{path:'user'}})
+    .exec(function(err,posts){
+
+        //get the list of all the users
+        User.find({},function(err,users){
+            return respond.render('home',{
+                title: 'Home',
+                posts:posts,
+                //send all the user to user
+                all_users:users
+        })
+
+        
         });
 
     }

@@ -20,11 +20,11 @@ const postSchema= new mongoose.Schema({
     comments:[{
         type:mongoose.Schema.Types.ObjectId,
         //ref: this shows we refer to which schema here we refer to user schema
-        ref:'comment'
+        ref:'Comment'
     }
 ]
 
- 
+  
     
 
 },{

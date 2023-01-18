@@ -9,7 +9,8 @@ router.get('/',homeController.home);
 router.get('/profile',homeController.profile)
 
 router.use('/users',require('./users'));
-router.use('/posts',require("./post"));
+router.use('/posts',require('./post'));
+router.use('/comments',require('./comments'));
 
 console.log('router loaded successfully');
 
