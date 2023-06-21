@@ -1,6 +1,9 @@
 //we need to add two models
 const Comment = require('../models/comment');
 const Post = require('../models/post');
+const Queue=require('../config/kue');
+const commentsMailer=require("../mailer/comments_mailer");
+const commentEmailWorker=require('../workers/comment_email_worker')
 
 module.exports.create = async function (req, res) {
     //  //we need to create a comment over a post so first we need to find whether that post exists..for that we will find the post using the post id and than wiil create comment  after it
@@ -48,18 +51,46 @@ module.exports.create = async function (req, res) {
             });
 
 
-            //now we have created the comment and added the post id to the comment so after this we have to add the comment to the post
+            //now we have created the comment and added the post id to the comment so after this we have to add the comment to the comments array inside post Schema
 
             post.comments.push(comment);
             //whenever we update something we need to call save as it tells database that its final version so block before it is only in the ram
             post.save();
+            //comment.user=req.user;
+            comment=await comment.populate('user','name email');
+            //commentsMailer.newComment(comment);
+
+            let job= Queue.create('email',comment).save(function(err){
+                if(err){
+                    console.log('error in creating a queue',err);
+                     return;
+                }
+
+                console.log('job enqued',job.id);
+            });
+            if (req.xhr){
+                // Similar for comments to fetch the user's id!
+               // comment = await comment.populate('user', 'name').execPopulate();
+               
+    
+                return res.status(200).json({
+                    data: {
+                        comment: comment
+                    },
+                    message: "Post created!"
+                });
+            }
+
+
+            req.flash('success', 'Comment published!');
+
 
             res.redirect('/');
         }
     }
     catch (err) {
 
-        console.log('error in creating comment'); return;
+        console.log('error in creating comment',err); return;
     }
 }
 
@@ -104,7 +135,21 @@ module.exports.destroy = async function (req, res) {
             comment.remove();
 
             //$pull--pull out the comment id from the list of comment
-            Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } });
+            let post=Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } });
+
+
+            // send the comment id which was deleted back to the views
+            if (req.xhr){
+                return res.status(200).json({
+                    data: {
+                        comment_id: req.params.id
+                    },
+                    message: "Post deleted"
+                });
+            }
+
+
+            req.flash('success', 'Comment deleted!');
 
             return res.redirect('back');
 

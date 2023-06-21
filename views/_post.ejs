@@ -1,9 +1,9 @@
-<li>
+<li id="post-<%= post._id %>">
     <p> 
         <!-- below verify  whether the user is signed in and the user who logged in is same the user who has made the post -->
         <% if(locals.user && locals.user.id==post.user.id) { %>
             <small>
-                <a href="/posts/destroy/<%= post.id%>">DELETE</a>
+                <a class="delete-post-button" href="/posts/destroy/<%= post.id%>">DELETE</a>
             </small>
         
         
@@ -16,7 +16,7 @@
 
     <div id="post-comments">
         <%if(locals.user){%>
-            <form action="/comments/create" method="post">
+            <form id="post-<%= post._id %>-comments-form" action="/comments/create" method="post">
                 <input type="text" name="content" placeholder="type here to add comments" required>
                 <!-- sent the id of the post to which comment need to be added -->
                 <input type="hidden" name="post" value="<%= post._id %>" >
@@ -24,9 +24,9 @@
             </form>
             <% } %>
     
-    </div>
+  
 
-    <div id="post-comments-list">
+    <div class="post-comments-list">
         <ul id="post-comments-<%= post._id %>">
             <% for(comment of post.comments) {%>
               <%-include('_comment')-%>
@@ -35,4 +35,5 @@
         </ul>
 
     </div>
+</div>
     </li> 

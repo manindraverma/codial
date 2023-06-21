@@ -1,8 +1,8 @@
-<li>
+<li id="comment-<%= comment._id %>">
     <p><!-- below verify  whether the user is signed in and the user who logged in is same the user who has made the post -->
         <% if(locals.user && locals.user.id==comment.user.id) { %>
             <small>
-                <a href="/comments/destroy/<%= comment.id%>">DELETE</a>
+                <a class="delete-comment-button" href="/comments/destroy/<%= comment.id%>">DELETE</a>
             </small>
         
         

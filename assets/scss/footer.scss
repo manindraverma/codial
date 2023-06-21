@@ -1,0 +1,34 @@
+// #Footer-container{
+
+//     padding: auto;
+//     color:white;
+//     font-size: 30px;
+//     border:1px solid black;
+//     display:flex;
+//     background-color: blue;
+//     justify-content: flex-start;
+//     // a{
+//     //     color:white;
+//     // }
+//     // list-style-type: none;
+//     // margin-right: 50px;
+// }
+
+#layout-footer{
+    color: white;
+    a{
+        color: white;
+        text-decoration: none;
+    }
+
+    background: grey;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: flex-start;
+
+    .footer-nav{
+        ul{
+            list-style: none;
+        }
+    }
+}

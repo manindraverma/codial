@@ -32,3 +32,21 @@ step 1: npm install connect-mongo@3
 inorder to style the browser page we use css basically but for more efficient way we are going to use sass/scss (css extension) for styling ...first our node-sass-middleware package will convert this scss code into css style and than serve to the browser as browser only understand css so below are the steps:
 
 step1:npm install node-sass-middleware
+
+inorder to show the flash message like -you have logged in or you have logged out than for this we have to use flash middleware whenever we sign in flash message is sent to session cookie and while refreshing it get erased :
+
+step1: npm install connect-flash
+step2: use the library inside the index.js
+
+
+//note to start the redis server run the command --> sudo service redis-server start and than run command -> redis-cli
+
+//note production run command do not work and shows error that is "'NODE_ENV' is not recognized as an internal or external command,
+operable program or batch file." , than run below command--- 
+npm install -g win-node-env
+
+
+if there is issue with production or development env than install npm i cross-env and make changes in package.json
+
+for accessing the environment variable in terminal first run "node " command and than run "process.env" command
+

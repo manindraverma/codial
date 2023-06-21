@@ -44,7 +44,10 @@ module.exports.home= async function(request,respond){
 //below codes are used only for async await method
 try{
     //first below codes will execute
-let posts=await Post.find({}).populate('user')
+let posts=await Post.find({})
+//sort and display the latest post on the top 
+.sort('-createdAt')
+.populate('user')
 //below we are population comment and also the user of that comment
 .populate({path:'comments',populate:{path:'user'}})
 

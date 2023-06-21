@@ -11,6 +11,12 @@ router.get('/profile',homeController.profile)
 router.use('/users',require('./users'));
 router.use('/posts',require('./post'));
 router.use('/comments',require('./comments'));
+router.use('/likes',require('./likes'));
+router.use('/reset-password',require('./resetPassword'));
+
+
+
+router.use('/api', require('./api'))
 
 console.log('router loaded successfully');
 
