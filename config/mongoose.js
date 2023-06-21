@@ -6,7 +6,7 @@ const mongoose=require('mongoose');
 //now we are using development environment so below 2 lines are mention
 const env= require('./environment');
 
-mongoose.connect(`mongodb://0.0.0.0:27017/`);
+mongoose.connect(`mongodb+srv://manindra301998:Manindra%40123@cluster0.xj75jd5.mongodb.net/?retryWrites=true&w=majority`);
 
 const db=mongoose.connection;
 
