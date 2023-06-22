@@ -4,7 +4,10 @@ class ChatEngine{
         this.chatBox= $(`#${chatBoxId}`);
         this.userEmail=userEmail;
         //below we are sending the connect request
-        this.socket=io.connect('http://localhost:5000');
+      //  this.socket=io.connect('http://localhost:5000');
+
+      //use below for using during deployment bcoz localhost will not be accessible
+        this.socket=io.connect('http://13.235.77.59 :5000');
 
 
         //below we are calling the connection Handler which detects if the connection has been completed by emitting a connect event

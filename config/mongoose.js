@@ -6,8 +6,8 @@ const mongoose=require('mongoose');
 //now we are using development environment so below 2 lines are mention
 const env= require('./environment');
 
-mongoose.connect(`mongodb+srv://manindra301998:Manindra%40123@cluster0.xj75jd5.mongodb.net/?retryWrites=true&w=majority`);
-
+mongoose.connect(`mongodb://localhost/${env.db}`);
+//mongoose.connect(`mongodb+srv://manindra301998:Manindra%40123@cluster0.xj75jd5.mongodb.net/?retryWrites=true&w=majority`);
 const db=mongoose.connection;
 
 db.on('error',console.error.bind(console,"error connecting to mongoDB"));
